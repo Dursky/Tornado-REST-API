@@ -24,7 +24,7 @@ $ python3 REST-API.py
 At the end go to link:
 http://127.0.0.1:8888/
 
-### Mini 'Dokumentacja' [PL]
+### Documentation / Dokumentacja
 
 [POST]
 [PL] Tworzenie nowego uzytkownika:<br>
