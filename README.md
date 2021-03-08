@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-This project based on simple REST API, we can get some information from data base trought this REST API
+This project based on simple CRUD method, we can get some information from data base trought this REST API.
 
 ### Tech-Stack
 
