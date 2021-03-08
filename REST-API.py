@@ -30,12 +30,15 @@ class GetUsers(tornado.web.RequestHandler):
 
 class GetUser(tornado.web.RequestHandler):
     def get(self, id):
-        # In build
-        sql = "INSERT INTO users (name, email) VALUES (%s)"
-        val = (id)
-        mycursor.execute(sql, val)
-        result = {"info": "Insert new user"}
-        self.write(json.dumps(result))
+        mycursor.execute(("SELECT * FROM users WHERE id ={}".format(id)))
+        myresult = mycursor.fetchall()
+        table = []
+        for row in myresult:
+            my_dict = {"id": row[0], "name": row[1],
+                       "email": row[2], "info": "Select all users"}
+            table.append(my_dict)
+        result = json.dumps(table)
+        self.write(result)
 
 
 class AddUser(tornado.web.RequestHandler):
@@ -49,6 +52,7 @@ class AddUser(tornado.web.RequestHandler):
 
 
 class PutUser(tornado.web.RequestHandler):
+    # in build
     def put(self, name, email, id):
         sql = ("UPDATE users SET name=", name,
                ", email=", email, " WHERE id=", id)
@@ -59,7 +63,7 @@ class PutUser(tornado.web.RequestHandler):
 
 application = tornado.web.Application([
     (r"/users/([0-9]+)/(.*)/(.*)", PutUser),  # Edit user [id/name/email]
-    (r"/users",  GetUsers),  # Get users
+    (r"/users", GetUsers),  # Get users
     (r'/users/([0-9]+)', GetUser),  # Get user by id - currently in build
     (r"/users/(.*)/(.*)", AddUser)  # Insert new user [name/email]
 
