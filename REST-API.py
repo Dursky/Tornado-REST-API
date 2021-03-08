@@ -53,9 +53,9 @@ class AddUser(tornado.web.RequestHandler):
 
 class PutUser(tornado.web.RequestHandler):
     # in build
-    def put(self, name, email, id):
-        sql = ("UPDATE users SET name=", name,
-               ", email=", email, " WHERE id=", id)
+    def put(self, id, name, email, ):
+        sql = ("UPDATE users SET name='{}' ,email='{}' WHERE id = {}".format(
+            name, email, int(id)))
         mycursor.execute(sql)
         result = {"info": "Edit new user"}
         self.write(json.dumps(result))
